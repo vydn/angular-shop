@@ -1,0 +1,38 @@
+<div ng-controller="ShopTopController">
+  <div class="col-md-10 col-md-offset-1" style="padding:0px;margin-bottom: 20px;">
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+      <input type="text" class="form-control" placeholder="Search for product" aria-describedby="sizing-addon1" name="keywords" ng-model="keywords">
+    </div>
+    <div class="form-inline pull-right" style="margin-top:20px;">
+      <div class="form-group text-right">
+        <label for="orderProp"> Sort by:</label>
+        <select ng-model="orderProp" class="form-control" name="orderProp">
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 col-md-offset-1 card" ng-repeat="product in products | filter:keywords | orderBy:orderProp">
+    <div class="col-md-3">
+      <img ng-src="/images/{{product.image}}">
+    </div>
+    <div class="col-md-9">
+      <a href="#" class="product-name">{{product.name}}</a><br>
+      <span class="product-producer">by {{product.producer}}</span><br>
+      <div class="description row">
+        <div class="col-md-6 product-price">${{product.price}}</div>
+        <div class="col-md-6 product-feature">
+          <b>Product features:</b><br>
+          {{product.features}}
+        </div>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-default btn-md" ng-click="add_to_cart(1, product.id)">
+            <i class="fa fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
